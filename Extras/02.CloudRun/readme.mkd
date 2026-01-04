@@ -1,0 +1,26 @@
+
+# Desde Visual
+
+zip app.zip app.py requirements.txt Dockerfile
+
+unzip -l app.zip
+
+gsutil mb -l us-central1 gs://mi-bucket-unico-123/
+gcloud config get-value project
+
+
+gcloud artifacts repositories create mi-repo \
+    --repository-format=docker \
+    --location=us-central1
+
+gsutil cp app.zip gs://cr-cf/
+
+
+gcloud builds submit gs://cr-cf/app.zip \
+    --project=acecloud-sel-1 \
+    --tag us-central1-docker.pkg.dev/acecloud-sel-1/repo-image/mi-app
+
+
+# Desde GCP 
+
+(base) info@cloudshell:~ (acecloud-sel-1)$ gcloud builds submit gs://cr-cf/app.zip     --tag europe-west1-docker.pkg.dev/acecloud-sel-1/docker-images/mi-app:v1
