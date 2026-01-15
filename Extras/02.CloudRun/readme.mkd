@@ -23,4 +23,4 @@ gcloud builds submit gs://cr-cf/app.zip \
 
 # Desde GCP 
 
-(base) info@cloudshell:~ (acecloud-sel-1)$ gcloud builds submit gs://cr-cf/app.zip     --tag europe-west1-docker.pkg.dev/acecloud-sel-1/docker-images/mi-app:v1
+gcloud builds submit gs://cr-cf/app.zip     --tag europe-west1-docker.pkg.dev/acecloud-sel-1/docker-images/mi-app:v1

@@ -1,49 +1,32 @@
 const { Storage } = require('@google-cloud/storage');
-const sharp = require('sharp');
-
 const storage = new Storage();
 
-exports.generateThumbnail = async (event, context) => {
-  // Compatibilidad: Cloud Storage moderno puede enviar event o event.data (Base64)
-  let data = event;
+exports.copyImage = async (req, res) => {
+  const event = req.body;
 
-  // Si viene desde Pub/Sub (Base64)
-  if (event.data) {
-    const jsonStr = Buffer.from(event.data, 'base64').toString();
-    data = JSON.parse(jsonStr);
-  }
+  // GCS_NOTIFICATION: los datos vienen en la raíz
+  const fileName = event.name;
+  const sourceBucketName = event.bucket;
 
-  const sourceBucketName = data.bucket; // Bucket donde se subió la imagen original
-  const fileName = data.name;
-
-  if (!fileName) {
-    console.log('No hay nombre de archivo, abortando función.');
+  if (!fileName || !sourceBucketName) {
+    console.log('No hay nombre de archivo o bucket, abortando función.');
+    console.log('Payload recibido:', JSON.stringify(event, null, 2));
+    res.status(400).send('Bad request');
     return;
   }
 
-  // Evitar procesar miniaturas ya generadas
-  if (fileName.startsWith('thumb_')) return;
+  console.log(`Copiando archivo: ${fileName} del bucket ${sourceBucketName}`);
 
   const sourceBucket = storage.bucket(sourceBucketName);
   const file = sourceBucket.file(fileName);
-  const tempFilePath = `/tmp/${fileName}`;
-  const thumbFileName = `thumb_${fileName}`;
+  const destinationBucket = storage.bucket('imagenes-miniaturas');
 
-  // Bucket destino para las miniaturas
-  const thumbnailBucket = storage.bucket('imagen-miniaturas');
-
-  // Descargar imagen temporalmente
-  await file.download({ destination: tempFilePath });
-
-  // Crear miniatura
-  await sharp(tempFilePath)
-    .resize(100, 100)
-    .toFile(`/tmp/${thumbFileName}`);
-
-  // Subir miniatura al bucket de miniaturas
-  await thumbnailBucket.upload(`/tmp/${thumbFileName}`, {
-    destination: thumbFileName,
-  });
-
-  console.log(`Miniatura creada en bucket 'imagen-miniaturas': ${thumbFileName}`);
+  try {
+    await file.copy(destinationBucket.file(fileName));
+    console.log(`Archivo copiado al bucket imagenes-miniaturas': ${fileName}`);
+    res.status(200).send('OK');
+  } catch (err) {
+    console.error('Error copiando la imagen:', err);
+    res.status(500).send('Error copiando la imagen');
+  }
 };

@@ -1,0 +1,79 @@
+# ☁️ Ejercicios Extra: Cloud Functions & Cloud Run en GCP
+
+![GCP](https://img.shields.io/badge/Platform-Google%20Cloud-blue?style=for-the-badge) 
+
+Este repositorio contiene **ejercicios prácticos de Cloud Functions y Cloud Run** en Google Cloud Platform.  
+El objetivo es aprender a manejar eventos de **Cloud Storage**, permisos de **IAM**, y desarrollar funciones **serverless** listas para producción.
+
+---
+
+## 🎯 Objetivos
+
+- Aprender a usar **Eventarc** con Cloud Functions
+- Integrar Cloud Functions con **Cloud Storage**
+- Gestionar permisos de **IAM** correctamente
+- Generar servicios HTTP con **Cloud Run**
+- Evitar errores comunes
+
+---
+
+## Ejercicio 1: Generar botación aletoría o chistes aletorios
+
+### 📌 Descripción
+
+
+## Ejercicio 2: Generar un mensaje 
+
+### 📌 Descripción
+
+Cloud Run expone HTTP público si --allow-unauthenticated, y Flask debe escuchar en 0.0.0.0 y puerto 8080. Funciona como servicio serverless escalable automáticamente
+
+## Ejercicio 3: Copiar imágenes entre buckets
+
+### 📌 Descripción
+
+En este ejercicio vamos a trabjar todo desde la propia intefaz de GCP. y el objetivo de este ejercicio es que cuando se sube un archivo al bucket se lanza la función y se copia una imagen de un bucket a otro. 
+
+---
+
+### Crear Cloud Functions 
+
+
+### Trigger
+
+- **Proveedor:** Cloud Storage  
+- **Tipo de evento:** `google.cloud.storage.object.v1.finalized`  
+- **Bucket origen:** `imagenes-originales`  
+- **Destino:** Cloud Function HTTP (Gen 2)  
+- **Modo:** `GCS_NOTIFICATION`  
+
+---
+
+### Payload recibido
+
+```json
+{
+  "name": "foto.png",
+  "bucket": "imagenes-originales",
+  "contentType": "image/png",
+  "timeCreated": "2026-01-06T19:41:17Z"
+}
+```
+
+### Permisos necesarios 
+
+```json
+roles/storage.objectCreator
+```
+
+## Ejercicio 4: 
+
+### 📌 Descripción
+
+
+
+
+# Casos de uso de proyectos reales 
+
+
+
