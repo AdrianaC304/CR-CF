@@ -152,7 +152,7 @@ curl -H "Authorization: Bearer $TOKEN" https://usuarios-api-rtwwkofpoa-ew.a.run.
 
 
 
-# Casos de uso de proyectos reales 
+# Casos de uso 
 
-![Texto alternativo](./images/diagrama1.png)
+![Texto alternativo](./imagen/diagram1.png)
 
