@@ -21,7 +21,7 @@ El objetivo es aprender a manejar eventos de **Cloud Storage**, permisos de **IA
 
 ### 📌 Descripción
 
-Vamos a usar una CLoud Funcition par generar chistes aletorios y votaciones aleatorias.
+Vamos a usar una Cloud Function par generar chistes aletorios y votaciones aleatorias.
 
 ## Ejercicio 2: Generar un mensaje 
 
@@ -66,7 +66,7 @@ En este ejercicio vamos a trabjar todo desde la propia intefaz de GCP. y el obje
 roles/storage.objectCreator
 ```
 
-## Ejercicio 4: 
+## Ejercicio 4: Lectura y análisis de usuarios en BigQuery mediante Cloud Run
 
 ### 📌 Descripción
 
