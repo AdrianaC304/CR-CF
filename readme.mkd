@@ -21,6 +21,7 @@ El objetivo es aprender a manejar eventos de **Cloud Storage**, permisos de **IA
 
 ### 📌 Descripción
 
+Vamos a usar una CLoud Funcition par generar chistes aletorios y votaciones aleatorias.
 
 ## Ejercicio 2: Generar un mensaje 
 
@@ -37,7 +38,6 @@ En este ejercicio vamos a trabjar todo desde la propia intefaz de GCP. y el obje
 ---
 
 ### Crear Cloud Functions 
-
 
 ### Trigger
 
@@ -72,7 +72,7 @@ roles/storage.objectCreator
 
 En este ejemplo vamos a leer de una Base de Datos (Bigquey) y vamos a ver que usuarios existen y que acciones realizan estos usuarios.
  
- La API de CLoud RUN expone:
+ La API de Cloud RUN expone:
 
 - Expone qué usuarios existen
 - Expone qué episodios existen
@@ -111,16 +111,46 @@ gcloud artifacts repositories create usuarios-repo \
   --location=us-central1
 ```
 
+Es importante tener la cuenta de servicio  702247964271@cloudbuild.gserviceaccount.com para desplegar la imagen en GCP:
+
+roles/storage.objectAdmin
+roles/cloudbuild.builds.editor
+roles/artifactregistry.writer
+BigQuery Data Viewer
+BigQuery Job User
+
+
+Creamos la imagen:
+
 ```json
 gcloud builds submit \
   --tag us-central1-docker.pkg.dev/serverless-477916/usuarios-repo/usuarios-api:latest .
 ```
 
-702247964271@cloudbuild.gserviceaccount.com
+Creamos la Cloud Run:
 
-roles/storage.objectAdmin
-roles/cloudbuild.builds.editor
-roles/artifactregistry.writer
+```json
+gcloud run deploy usuarios-api \
+  --image us-central1-docker.pkg.dev/serverless-477916/usuarios-repo/usuarios-api:latest \
+  --platform managed \
+  --allow-unauthenticated
+```
+
+Desde el temrinal podemos acceder a el identificador de todos los clientes: 
+
+```json
+gcloud auth print-identity-token
+```
+
+```json
+TOKEN=$(gcloud auth print-identity-token)
+```
+
+```json
+curl -H "Authorization: Bearer $TOKEN" https://usuarios-api-rtwwkofpoa-ew.a.run.app/users
+```
+
+
 
 # Casos de uso de proyectos reales 
 
