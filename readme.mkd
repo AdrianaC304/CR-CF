@@ -70,8 +70,57 @@ roles/storage.objectCreator
 
 ### 📌 Descripción
 
+En este ejemplo vamos a leer de una Base de Datos (Bigquey) y vamos a ver que usuarios existen y que acciones realizan estos usuarios.
+ 
+ La API de CLoud RUN expone:
+
+- Expone qué usuarios existen
+- Expone qué episodios existen
+- Es la fuente de verdad para el generador
 
 
+Resumen de la Arquitectura:
+
+|Base de datos| >> |API| >> |Generador de eventos| >> |Pub/Sub|
+
+
+
+```json
+gcloud config list
+```
+
+```json
+gcloud config set project <PROJECT_ID>
+```
+
+```json
+gcloud services enable cloudbuild.googleapis.com
+```
+
+```json
+gcloud services enable run.googleapis.com containerregistry.googleapis.com
+```
+
+```json
+gcloud services enable artifactregistry.googleapis.com
+```
+
+```json
+gcloud artifacts repositories create usuarios-repo \
+  --repository-format=docker \
+  --location=us-central1
+```
+
+```json
+gcloud builds submit \
+  --tag us-central1-docker.pkg.dev/serverless-477916/usuarios-repo/usuarios-api:latest .
+```
+
+702247964271@cloudbuild.gserviceaccount.com
+
+roles/storage.objectAdmin
+roles/cloudbuild.builds.editor
+roles/artifactregistry.writer
 
 # Casos de uso de proyectos reales 
 
