@@ -156,3 +156,9 @@ curl -H "Authorization: Bearer $TOKEN" https://usuarios-api-rtwwkofpoa-ew.a.run.
 
 
 
+![Diagrama de la arquitectura](images/diagrama1.png)
+
+![Diagrama de la arquitectura](../images/diagrama1.png)
+
+<img src="images/diagrama1.png" alt="Diagrama de la arquitectura" width="500">
+
