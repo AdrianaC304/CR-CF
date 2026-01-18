@@ -154,11 +154,5 @@ curl -H "Authorization: Bearer $TOKEN" https://usuarios-api-rtwwkofpoa-ew.a.run.
 
 # Casos de uso de proyectos reales 
 
-
-
-![Diagrama de la arquitectura](images/diagrama1.png)
-
-![Diagrama de la arquitectura](../images/diagrama1.png)
-
-<img src="images/diagrama1.png" alt="Diagrama de la arquitectura" width="500">
+![Texto alternativo](./images/diagrama1.png)
 
