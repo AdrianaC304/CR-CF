@@ -150,5 +150,3 @@ curl -H "Authorization: Bearer $TOKEN" https://usuarios-api-rtwwkofpoa-ew.a.run.
 
 ## Caso de uso 2:
 ![Texto alternativo](./imagen/diagram2.png)
-
-## Caso de uso 3:
