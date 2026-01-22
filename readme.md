@@ -7,16 +7,6 @@ El objetivo es aprender a manejar eventos de **Cloud Storage**, permisos de **IA
 
 ---
 
-## 🎯 Objetivos
-
-- Aprender a usar **Eventarc** con Cloud Functions
-- Integrar Cloud Functions con **Cloud Storage**
-- Gestionar permisos de **IAM** correctamente
-- Generar servicios HTTP con **Cloud Run**
-- Evitar errores comunes
-
----
-
 ## Ejercicio 1: Generar botación aletoría o chistes aletorios
 
 ### 📌 Descripción
@@ -152,7 +142,13 @@ curl -H "Authorization: Bearer $TOKEN" https://usuarios-api-rtwwkofpoa-ew.a.run.
 
 
 
-# Casos de uso 
+# Uso de las Cloud Run y Cloud Functions en proyectos reales
+
+## Caso de uso 1:
 
 ![Texto alternativo](./imagen/diagram1.png)
 
+## Caso de uso 2:
+![Texto alternativo](./imagen/diagram2.png)
+
+## Caso de uso 3:
